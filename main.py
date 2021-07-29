@@ -33,7 +33,7 @@ edit_in_repo = os.getenv('EDIT_IN_REPO', True) # If you want to edit status in G
 edit_in_telegram = os.getenv('EDIT_IN_TELEGRAM', True) # If you want to edit status in Telegram, set it to True else False
 start_text = " All our BOT's Status\n▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄" # default for start_message.
 start_message = os.getenv('START_MESSAGE', start_text) # text before the status to show.
-end_text = "**Bots status are auto-updated every 1 hour at random frequency.**" # default for end_message.
+end_text = "__Bots status are auto-updated every 1 hour at random frequency.__" # default for end_message.
 end_message = os.getenv('END_MESSAGE', end_text) # text after the status to show.
 commit_message = os.getenv('COMMIT_MESSAGE', '✨ auto-updated bot status. ✨') # commit message at status update. Btw, stars looks cool.
 bullet = os.getenv('BULLET', '☞') # if you want to get custom bullets in Telegram.
@@ -96,7 +96,7 @@ async def edit_message(data):
         text = f'{start_message}\n' # I love f-strings and to comment every line :)
         for i in data:
             text += f"{bullet} [{data[i]['name']}](https://t.me/{i}) ~ {up_telegram if data[i]['status'] else down_telegram}\n\n"
-        text += f"\n**Last Checked:** \n`{current_time} [UTC]`\n"
+        text += f"\n**Last Checked:** \n`{current_time} [UTC]`\n\n"
         text += end_message
         chats_to_edit = get_ids(all_mixed_ids)
         for chat_id, message_id in chats_to_edit:
