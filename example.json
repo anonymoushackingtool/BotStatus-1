@@ -10,6 +10,6 @@
 	"G_Translator_bot": {
 		"start": "start",
 		"sleep": 2
-	},
+	}
 	
 }
