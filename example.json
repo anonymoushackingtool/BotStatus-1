@@ -1,18 +1,15 @@
 {
-	"pypi_dlbot": {
+	"Nios_books_10th_class_bot": {
 		"start": "start",
 		"sleep": 2
 	},
-	"ixail_bot": {
+	"Utube_downloadbot": {
 		"start": "start",
 		"sleep": 2
 	},
-	"secure_me_robot": {
+	"G_Translator_bot": {
 		"start": "start",
 		"sleep": 2
 	},
-	"medium_free_robot": {
-		"start": "start",
-		"sleep": 2
-	}
+	
 }
