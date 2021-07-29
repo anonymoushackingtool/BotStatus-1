@@ -38,7 +38,7 @@ end_message = os.getenv('END_MESSAGE', end_text) # text after the status to show
 commit_message = os.getenv('COMMIT_MESSAGE', '✨ auto-updated bot status. ✨') # commit message at status update. Btw, stars looks cool.
 bullet = os.getenv('BULLET', '☞') # if you want to get custom bullets in Telegram.
 time_zone = os.getenv('TIME_ZONE', 'Greenwich') # ISD. You can choose different as per your location.
-time_format = os.getenv('TIME_FORMAT', '%H:%M:%S-%d %B %Y') # Time format, defaults to Hrs:minutes Day/Month. Eg, 9:41 12/9
+time_format = os.getenv('TIME_FORMAT', '%H:%M:%S - %d %B %Y') # Time format, defaults to Hrs:minutes Day/Month. Eg, 9:41 12/9
 current_time = datetime.now(timezone(time_zone)).strftime(time_format) # Time when the script runs.
 up_github = os.getenv('UP_GITHUB', '✔️') # Custom Icon when Bot is up to show in GitHub MarkDown file.
 down_github = os.getenv('DOWN_GITHUB', '❌') # Custom Icon when Bot is down to show in GitHub MarkDown file.
@@ -95,8 +95,8 @@ async def edit_message(data):
     async with client:
         text = f'{start_message}\n' # I love f-strings and to comment every line :)
         for i in data:
-            text += f"{bullet} [{data[i]['name']}](https://t.me/{i}) ~ {up_telegram if data[i]['status'] else down_telegram}\n"
-        text += f"\n**Last Checked:** \n__{current_time}__\n"
+            text += f"{bullet} [{data[i]['name']}](https://t.me/{i}) ~ {up_telegram if data[i]['status'] else down_telegram}\n\n"
+        text += f"\n**Last Checked:** \n`{current_time} [UTC]`\n"
         text += end_message
         chats_to_edit = get_ids(all_mixed_ids)
         for chat_id, message_id in chats_to_edit:
