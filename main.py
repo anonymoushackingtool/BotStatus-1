@@ -5,6 +5,7 @@
 # import modules
 import os
 import re
+import json
 import github
 import logging
 import telethon
@@ -29,15 +30,15 @@ all_mixed_ids = os.getenv('IDS', None) # All Chat IDs along with message IDs (Te
 
 # Optional :-
 file_name = os.getenv('FILE_NAME', 'README.md') # filename is case sensitive.
-edit_in_repo = os.getenv('EDIT_IN_REPO', True) # If you want to edit status in GitHub Repo, set it to True else False.
-edit_in_telegram = os.getenv('EDIT_IN_TELEGRAM', True) # If you want to edit status in Telegram, set it to True else False
+edit_in_repo = json.loads(os.getenv('EDIT_IN_REPO', 'True').lower())  # If you want to edit status in GitHub Repo, set it to True else False.
+edit_in_telegram = json.loads(os.getenv('EDIT_IN_TELEGRAM', 'True').lower()) # If you want to edit status in Telegram, set it to True else False
 start_text = " All our BOT's Status\n▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄" # default for start_message.
 start_message = os.getenv('START_MESSAGE', start_text) # text before the status to show.
 end_text = "__Bots status are auto-updated every 1 hour at random frequency.__" # default for end_message.
 end_message = os.getenv('END_MESSAGE', end_text) # text after the status to show.
 commit_message = os.getenv('COMMIT_MESSAGE', '✨ auto-updated bot status. ✨') # commit message at status update. Btw, stars looks cool.
 bullet = os.getenv('BULLET', '☞') # if you want to get custom bullets in Telegram.
-time_zone = os.getenv('TIME_ZONE', 'Greenwich') # ISD. You can choose different as per your location.
+time_zone = os.getenv('TIME_ZONE', 'Greenwich') # UTC. You can choose different as per your location.
 time_format = os.getenv('TIME_FORMAT', '%H:%M:%S - %d %B %Y') # Time format, defaults to Hrs:minutes Day/Month. Eg, 9:41 12/9
 current_time = datetime.now(timezone(time_zone)).strftime(time_format) # Time when the script runs.
 up_github = os.getenv('UP_GITHUB', '✔️') # Custom Icon when Bot is up to show in GitHub MarkDown file.
@@ -110,6 +111,7 @@ async def edit_message(data):
 # run the script via __main__ style
 if __name__ == '__main__':
     json_data = client.loop.run_until_complete(main())
+    os.system(f"echo '::set-output name=STATUS::{json_data}'") # sets JSON data as output, so that you can use the json data for other use also.
     display()
     for each in json_data:
         print(f"🔸 {json_data[each]['name']} [@{each}] is {'🟢' if json_data[each]['status'] else '🔴'}")
