@@ -104,7 +104,7 @@ async def edit_message(data):
         curr_date = current_time.split("- ")[-1]
         replacing = curr_time.replace(":", "%3A")
         time_link = f"https://www.google.com/search?q={replacing}+UTC+in+local+time"
-        text += f"\n**Last Checked:** \n[{curr_time}]({time_link})- `{curr_date} [UTC]`\n\n"
+        text += f"\n**Last Checked:** \n[{curr_time}]({time_link})- `{curr_date}` [UTC]({time_link})\n\n"
         text += end_message
         chats_to_edit = get_ids(all_mixed_ids)
         for chat_id, message_id in chats_to_edit:
