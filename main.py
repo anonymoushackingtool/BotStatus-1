@@ -97,7 +97,14 @@ async def edit_message(data):
         text = f'{start_message}\n' # I love f-strings and to comment every line :)
         for i in data:
             text += f"{bullet} [{data[i]['name']}](https://t.me/{i}) ~ {up_telegram if data[i]['status'] else down_telegram}\n\n"
-        text += f"\n**Last Checked:** \n`{current_time} [UTC]`\n\n"
+        #time_zone =  "Greenwich" #UTC. You can choose different as per your location.
+        #time_format = "%H:%M:%S"
+        #b =datetime.now(timezone(time_zone)).strftime(time_format)
+        curr_time = current_time.split("- ")[0]
+        curr_date = current_time.split("- ")[-1]
+        replacing = b.replace(":", "%3A")
+        time_link = f"https://www.google.com/search?q={replacing}+UTC+in+local+time"
+        text += f"\n**Last Checked:** \n[{curr_time}]({time_link})- `{curr_date} [UTC]`\n\n"
         text += end_message
         chats_to_edit = get_ids(all_mixed_ids)
         for chat_id, message_id in chats_to_edit:
