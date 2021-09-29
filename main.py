@@ -102,7 +102,7 @@ async def edit_message(data):
         #b =datetime.now(timezone(time_zone)).strftime(time_format)
         curr_time = current_time.split("- ")[0]
         curr_date = current_time.split("- ")[-1]
-        replacing = b.replace(":", "%3A")
+        replacing = curr_time.replace(":", "%3A")
         time_link = f"https://www.google.com/search?q={replacing}+UTC+in+local+time"
         text += f"\n**Last Checked:** \n[{curr_time}]({time_link})- `{curr_date} [UTC]`\n\n"
         text += end_message
