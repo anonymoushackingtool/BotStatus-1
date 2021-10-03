@@ -109,7 +109,7 @@ async def edit_message(data):
         chats_to_edit = get_ids(all_mixed_ids)
         for chat_id, message_id in chats_to_edit:
             try:
-                await client.edit_message(int(chat_id), int(message_id), text, link_preview=False)
+                await client.edit_message(int(chat_id), int(message_id), text, link_preview=False, parse_mode='md')
             except MessageIdInvalidError:
                 print(f'Provided message ID ({message_id}) is invalid of chat ({chat_id}), Maybe message Id representing the Message is Deleted or was not sent before.')
             except MessageAuthorRequiredError:
